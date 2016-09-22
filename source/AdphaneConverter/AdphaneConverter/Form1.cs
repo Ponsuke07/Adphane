@@ -40,7 +40,7 @@ namespace Cvsharp_test
                     Cv.CvtColor(gray_img, img, ColorConversion.GrayToRgb);
                     gamma_bar.Value = 20;
                     gamma_bar.Enabled = true;
-                    Convert_buttom.Enabled = true;
+                    ConvertButtom.Enabled = true;
                     update(img);
                 }
                 catch (OpenCvSharp.OpenCvSharpException ex)
@@ -60,7 +60,9 @@ namespace Cvsharp_test
             }
 
         }
-        unsafe private void Comvert_buttom_Click(object sender, EventArgs e)
+
+        private StreamWriter streamWriter;
+        unsafe private void Convert_buttom_Click(object sender, EventArgs e)
         {
             DialogResult dRet;
             IplImage source_image=pictureBoxIpl1.ImageIpl;
@@ -82,19 +84,28 @@ namespace Cvsharp_test
                     }
                 
                 }
-                
-                StreamWriter sw = new StreamWriter("output.dat", false, Encoding.ASCII);
-                sw.Write(output);
+
+                //if(streamWriter == null)
+                    streamWriter = new StreamWriter("output.dat", false, Encoding.ASCII);
+                streamWriter.Write(output);
                 //end of writing dat file.
                 System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
                 psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
                 psi.FileName = "openscad.com";
                 psi.Arguments = "-o " + saveFileDialog.FileName + " lith.scad";
-                System.Diagnostics.Process temp = System.Diagnostics.Process.Start(psi);
+                System.Diagnostics.Process scadThread = new System.Diagnostics.Process();
+                scadThread.StartInfo = psi;
+                scadThread.SynchronizingObject = this;
+                scadThread.Exited += new EventHandler(scadThread_Exited);
+                scadThread.EnableRaisingEvents = true;
+                scadThread.Start();
+                //temp.EnableRaisingEvents = true;
                 MessageBox.Show("STLファイル作成中です。しばらくお待ちください。");
-                temp.WaitForExit();
-                sw.Close();
-                MessageBox.Show("Complet!");
+                this.ConvertButtom.Text = "変換中";
+                this.ConvertButtom.Enabled = false;
+                
+                //temp.
+
             }
             else
             {
@@ -102,6 +113,14 @@ namespace Cvsharp_test
             }
 
 
+        }
+
+        private void scadThread_Exited(object sender, EventArgs e)
+        {
+            this.ConvertButtom.Text = "コンバート";
+            this.ConvertButtom.Enabled = true;
+            streamWriter.Close();
+            MessageBox.Show("Complete!");
         }
 
         private void Form1_Load(object sender, EventArgs e)

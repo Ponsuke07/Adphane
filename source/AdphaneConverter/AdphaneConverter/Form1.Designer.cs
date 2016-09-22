@@ -30,7 +30,7 @@
         {
             this.pictureBoxIpl1 = new OpenCvSharp.UserInterface.PictureBoxIpl();
             this.file_select = new System.Windows.Forms.Button();
-            this.Convert_buttom = new System.Windows.Forms.Button();
+            this.ConvertButtom = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.gamma_bar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).BeginInit();
@@ -56,17 +56,17 @@
             this.file_select.UseVisualStyleBackColor = true;
             this.file_select.Click += new System.EventHandler(this.file_select_Click);
             // 
-            // Convert_buttom
+            // ConvertButtom
             // 
-            this.Convert_buttom.Enabled = false;
-            this.Convert_buttom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Convert_buttom.Location = new System.Drawing.Point(119, 362);
-            this.Convert_buttom.Name = "Convert_buttom";
-            this.Convert_buttom.Size = new System.Drawing.Size(96, 34);
-            this.Convert_buttom.TabIndex = 4;
-            this.Convert_buttom.Text = "コンバート";
-            this.Convert_buttom.UseVisualStyleBackColor = true;
-            this.Convert_buttom.Click += new System.EventHandler(this.Comvert_buttom_Click);
+            this.ConvertButtom.Enabled = false;
+            this.ConvertButtom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ConvertButtom.Location = new System.Drawing.Point(119, 362);
+            this.ConvertButtom.Name = "ConvertButtom";
+            this.ConvertButtom.Size = new System.Drawing.Size(96, 34);
+            this.ConvertButtom.TabIndex = 4;
+            this.ConvertButtom.Text = "コンバート";
+            this.ConvertButtom.UseVisualStyleBackColor = true;
+            this.ConvertButtom.Click += new System.EventHandler(this.Convert_buttom_Click);
             // 
             // saveFileDialog
             // 
@@ -95,11 +95,11 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(232, 410);
             this.Controls.Add(this.gamma_bar);
-            this.Controls.Add(this.Convert_buttom);
+            this.Controls.Add(this.ConvertButtom);
             this.Controls.Add(this.file_select);
             this.Controls.Add(this.pictureBoxIpl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Adphane Converter";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gamma_bar)).EndInit();
@@ -111,7 +111,7 @@
 
         private OpenCvSharp.UserInterface.PictureBoxIpl pictureBoxIpl1;
         private System.Windows.Forms.Button file_select;
-        private System.Windows.Forms.Button Convert_buttom;
+        private System.Windows.Forms.Button ConvertButtom;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.TrackBar gamma_bar;
     }
